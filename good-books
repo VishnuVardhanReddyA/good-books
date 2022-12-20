@@ -1,0 +1,110 @@
+import "./styles.css";
+import { useState } from "react";
+const DB = {
+  Javascript: [
+    { name: "Eloquent JavaScript", rating: "4/5" },
+    { name: "You Don't Know JS", rating: "3.5/5" },
+    { name: "A Smarter Way to Learn JavaScript by Mark Myers", rating: "3.5/5" }
+  ],
+  Psychology: [
+    {
+      name: "Think Fast and slow",
+      rating: "5/5"
+    },
+    {
+      name: "Power of Habit",
+      rating: "4.5/5"
+    },
+    {
+      name: "Atomic Habits",
+      rating: "4.5/5"
+    }
+  ],
+  Money: [
+    {
+      name: "Rich Dad Poor Dad",
+      rating: "5/5"
+    },
+    {
+      name: "The Richest Man in Babylon",
+      rating: "4.5/5"
+    },
+    {
+      name: "Psychology of Money",
+      rating: "5/5"
+    }
+  ]
+};
+
+export default function App() {
+  const [genreSelected, setGenre] = useState("Javascript");
+
+  function genreClickHandler(genre) {
+    setGenre(genre);
+  }
+
+  return (
+    <div className="App">
+      <h1 style={{ fontFamily: "cursive", fontSize: "40px" }}>
+        <span role="img">📚</span> Good Books
+      </h1>
+      {Object.keys(DB).map((genre) => (
+        <button
+          className="btn"
+          onClick={() => genreClickHandler(genre)}
+          style={{
+            backgroundColor: "azure",
+            margin: "10px",
+            padding: "12px",
+            borderRadius: "10px",
+            cursor: "pointer",
+            fontSize: "1.5rem"
+          }}
+        >
+          {genre}
+        </button>
+      ))}
+      <hr style={{ width: "75%" }} />
+
+      <div style={{ textAlign: "left" }}>
+        <ul style={{ paddingInlineStart: "0" }}>
+          {DB[genreSelected].map((b) => (
+            <li
+              style={{
+                listStyle: "none",
+                marginLeft: "25%",
+                marginBottom: "20px",
+                border: "1px solid ",
+                width: "50%",
+                alignContent: "center",
+                alignItems: "center",
+                padding: "7px"
+              }}
+            >
+              {" "}
+              <div
+                style={{
+                  fontFamily: "comic sans ms",
+                  fontSize: "1.6rem",
+                  color: ""
+                }}
+              >
+                {b.name}
+              </div>
+              <div
+                style={{
+                  fontFamily: "comic sans ms",
+                  fontSize: "1rem",
+                  paddingTop: "5px",
+                  color: ""
+                }}
+              >
+                {b.rating}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
